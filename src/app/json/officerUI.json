@@ -1,0 +1,119 @@
+{
+  "name": "Saaraketha Officer UI",
+  "version": "0.7.0",
+  "tenantID": "001",
+  "stages": [
+    {
+      "name": "Sample Stage",
+      "stageId": "00101",
+      "sections": [
+        {
+          "name": "Section 01",
+          "fields": {
+            "booleanField": {
+              "label": "Boolean Field",
+              "controlType": "checkbox",
+              "required": true,
+              "order": 0
+            },
+            "floatField": {
+              "label": "Float Field",
+              "controlType": "floatNumber",
+              "required": true,
+              "order": 1
+            },
+            "integerField": {
+              "label": "Integer Field",
+              "contolType": "integerNumber",
+              "required": true,
+              "order": 2
+            },
+            "dateTimeField": {
+              "label": "Date Time Field",
+              "contolType": "datetime",
+              "required": true,
+              "order": 3
+            },
+            "photoField": {
+              "label": "Photo Field",
+              "contolType": "photo",
+              "required": true,
+              "order": 4
+            },
+            "textField": {
+              "label": "Text Field",
+              "contolType": "text",
+              "required": true,
+              "order": 5
+            },
+            "artifactField": {
+              "label": "Artifact Field",
+              "contolType": "artifact",
+              "required": true,
+              "order": 6
+            },
+            "listField": {
+              "label": "List Field",
+              "contolType": "list",
+              "required": true,
+              "order": 7
+            },
+            "groupField": {
+              "label": "Group",
+              "contolType": "group",
+              "order": 8,
+              "items": {
+                "booleanField2": {
+                  "label": "Boolean Field 2",
+                  "controlType": "checkbox",
+                  "required": true,
+                  "order": 0
+                },
+                "floatField2": {
+                  "label": "Float Field 2",
+                  "controlType": "floatNumber",
+                  "required": true,
+                  "order": 1
+                }
+              }
+            },
+            "cascadingCheckboxField": {
+              "label": "Cascading Checkbox Field",
+              "contolType": "checkbox",
+              "cascade": true,
+              "order": 9,
+              "true": {
+                "booleanField3": {
+                  "label": "Boolean Field 3",
+                  "controlType": "checkbox",
+                  "required": true,
+                  "order": 0
+                },
+                "floatField3": {
+                  "label": "Float Field 3",
+                  "controlType": "floatNumber",
+                  "required": true,
+                  "order": 1
+                }
+              },
+              "false": {
+                "booleanField4": {
+                  "label": "Boolean Field 4",
+                  "controlType": "checkbox",
+                  "required": true,
+                  "order": 0
+                },
+                "floatField4": {
+                  "label": "Float Field 4",
+                  "controlType": "floatNumber",
+                  "required": true,
+                  "order": 1
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
