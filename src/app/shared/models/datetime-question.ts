@@ -1,11 +1,9 @@
 import { BaseQuestion } from './base-question';
 
 export class DatetimeQuestion extends BaseQuestion<string> {
-  controlType = 'date-time';
-  type: string;
+  controlType = 'dateTime';
 
   constructor(options: {} = {}) {
     super(options);
-    this.type = options['type'] || '';
   }
 }
