@@ -9,6 +9,7 @@
       "sections": [
         {
           "name": "Section 01",
+          "key": "section01",
           "fields": {
             "booleanField": {
               "label": "Boolean Field",

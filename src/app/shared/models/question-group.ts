@@ -6,14 +6,10 @@ export class QuestionGroup extends BaseQuestion<null> {
   order: number;
   controlType = 'group';
 
-  constructor(options: {
-    questions?: BaseQuestion<any>[],
-    key?: string,
-    order?: number
-  }) {
+  constructor(options: {} = {}) {
     super(options);
-    this.questions = options.questions;
-    this.label = options.key;
-    this.order = options.order;
+    this.questions = options['questions'];
+    this.label = options['key'];
+    this.order = options['order'];
   }
 }
