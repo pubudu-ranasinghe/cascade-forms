@@ -4,7 +4,7 @@ export class QuestionGroup extends BaseQuestion<null> {
   questions: BaseQuestion<any>[];
   label: string;
   order: number;
-  controlType = 'group'
+  controlType = 'group';
 
   constructor(options: {
     questions?: BaseQuestion<any>[],

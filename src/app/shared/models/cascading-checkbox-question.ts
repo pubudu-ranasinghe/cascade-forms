@@ -1,9 +1,10 @@
-import { CheckboxQuestion, QuestionGroup } from './';
+import { CheckboxQuestion } from './checkbox-question';
+import { QuestionGroup } from './question-group';
 
 export class CascadingCheckboxQuestion extends CheckboxQuestion {
   options: {
     active: boolean,
-    questions: QuestionGroup[]
+    questions: QuestionGroup
   }[];
 
   constructor(options: {} = {}) {
