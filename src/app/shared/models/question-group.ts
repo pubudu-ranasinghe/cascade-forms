@@ -6,7 +6,7 @@ export class QuestionGroup {
   order: number;
 
   constructor(options: {
-    questions: BaseQuestion<any>[],
+    questions?: BaseQuestion<any>[],
     key?: string,
     order?: number
   }) {
