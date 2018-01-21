@@ -8,7 +8,8 @@ import {
   TextQuestion,
   ArtifactQuestion,
   ListQuestion,
-  QuestionGroup
+  QuestionGroup,
+  CascadingCheckboxQuestion
 } from '../shared/models/index';
 
 @Injectable()
@@ -19,6 +20,32 @@ export class QuestionBuilderService {
   private makeQuestion(data: any, key: string): BaseQuestion<any> | QuestionGroup {
     const controlType = data.controlType;
     if (controlType === 'checkbox') {
+      if (data.cascade) {
+        const cascadeGroups = [];
+        Object.keys(data.cascade).forEach(cascadeGroupKey => {
+          const questionArray: BaseQuestion<any>[] = [];
+          Object.keys(data.cascade[cascadeGroupKey])
+            .forEach(itemKey => {
+              questionArray.push(this.makeQuestion(data.cascade[cascadeGroupKey][itemKey], itemKey));
+            });
+          const cascadeGroup = new QuestionGroup({
+            questions: questionArray,
+            key: cascadeGroupKey
+          });
+          cascadeGroups.push({
+            active: false,
+            questions: cascadeGroup
+          });
+        });
+
+        return new CascadingCheckboxQuestion({
+          cascadeGroups: cascadeGroups,
+          key: key,
+          label: data.label,
+          required: data.required,
+          order: data.order
+        });
+      }
       return new CheckboxQuestion({
         key: key,
         label: data.label,
@@ -75,17 +102,37 @@ export class QuestionBuilderService {
         order: data.order
       });
     } else if (controlType === 'group') {
-      return new QuestionGroup({});
+      const questionArray: BaseQuestion<any>[] = [];
+      Object.keys(data.items).forEach(item => {
+        questionArray.push(this.makeQuestion(data.items[item], item));
+      });
+      return new QuestionGroup({
+        questions: questionArray,
+        key: data.key
+      });
     } else { return null; }
   }
 
   build(data: any) {
-    // data.sections.forEach(section => {
-    //   const sectionFields: BaseQuestion<any>[] = [];
-    //   Object.keys(section.fields).forEach(fieldKey => {
-    //     sectionfthis.makeQuestion(section.fields[fieldKey], fieldKey);
-    //   });
-    // });
+    const masterQArray: BaseQuestion<any>[] = [];
+    data.sections.forEach(section => {
+      const sectionFields: BaseQuestion<any>[] = [];
+      Object.keys(section.fields).forEach(fieldKey => {
+        sectionFields
+          .push(this.makeQuestion(section.fields[fieldKey], fieldKey));
+      });
+      const sectionGroup: QuestionGroup = new QuestionGroup({
+        questions: sectionFields,
+        key: section.key
+      });
+      masterQArray.push(sectionGroup);
+    });
+    const masterGroup: QuestionGroup = new QuestionGroup({
+      questions: masterQArray,
+      key: data.stageId
+    });
+
+    console.log(masterGroup);
   }
 
 }

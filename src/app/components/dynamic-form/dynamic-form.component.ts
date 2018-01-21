@@ -22,6 +22,7 @@ export class DynamicFormComponent implements OnInit {
         'sections': [
           {
             'name': 'Section 01',
+            'key': 'section01',
             'fields': {
               'booleanField': {
                 'label': 'Boolean Field',
@@ -93,34 +94,35 @@ export class DynamicFormComponent implements OnInit {
               'cascadingCheckboxField': {
                 'label': 'Cascading Checkbox Field',
                 'controlType': 'checkbox',
-                'cascade': true,
                 'order': 9,
-                'true': {
-                  'booleanField3': {
-                    'label': 'Boolean Field 3',
-                    'controlType': 'checkbox',
-                    'required': true,
-                    'order': 0
+                'cascade': {
+                  'true': {
+                    'booleanField3': {
+                      'label': 'Boolean Field 3',
+                      'controlType': 'checkbox',
+                      'required': true,
+                      'order': 0
+                    },
+                    'floatField3': {
+                      'label': 'Float Field 3',
+                      'controlType': 'floatNumber',
+                      'required': true,
+                      'order': 1
+                    }
                   },
-                  'floatField3': {
-                    'label': 'Float Field 3',
-                    'controlType': 'floatNumber',
-                    'required': true,
-                    'order': 1
-                  }
-                },
-                'false': {
-                  'booleanField4': {
-                    'label': 'Boolean Field 4',
-                    'controlType': 'checkbox',
-                    'required': true,
-                    'order': 0
-                  },
-                  'floatField4': {
-                    'label': 'Float Field 4',
-                    'controlType': 'floatNumber',
-                    'required': true,
-                    'order': 1
+                  'false': {
+                    'booleanField4': {
+                      'label': 'Boolean Field 4',
+                      'controlType': 'checkbox',
+                      'required': true,
+                      'order': 0
+                    },
+                    'floatField4': {
+                      'label': 'Float Field 4',
+                      'controlType': 'floatNumber',
+                      'required': true,
+                      'order': 1
+                    }
                   }
                 }
               }
@@ -134,7 +136,7 @@ export class DynamicFormComponent implements OnInit {
   constructor(private qbs: QuestionBuilderService) { }
 
   ngOnInit() {
-    console.log(this.officerjson);
+    // console.log(this.officerjson);
     this.qbs.build(this.officerjson.stages[0]);
   }
 
