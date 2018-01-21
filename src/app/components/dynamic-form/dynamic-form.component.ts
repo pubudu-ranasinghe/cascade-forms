@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { QuestionBuilderService } from '../../services/question-builder.service';
 import { QuestionGroup, TextQuestion, CheckboxQuestion } from '../../shared/models/index';
 import { BaseQuestion } from '../../shared/models/base-question';
+import { QuestionControlService } from '../../services/question-control.service';
 
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.css'],
-  providers: [QuestionBuilderService]
+  providers: [QuestionBuilderService, QuestionControlService]
 })
 export class DynamicFormComponent implements OnInit {
 
@@ -133,11 +135,15 @@ export class DynamicFormComponent implements OnInit {
     ]
   };
 
-  constructor(private qbs: QuestionBuilderService) { }
+  constructor(
+    private qbs: QuestionBuilderService,
+    private qcs: QuestionControlService
+  ) { }
 
   ngOnInit() {
-    // console.log(this.officerjson);
-    this.qbs.build(this.officerjson.stages[0]);
+    const q = this.qbs.build(this.officerjson.stages[0]);
+    console.log(this.qcs.toFormGroup(q));
+    // console.log(this.fb.group(this.qbs.build(this.officerjson.stages[0])));
   }
 
 }
