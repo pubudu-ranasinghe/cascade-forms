@@ -9,6 +9,7 @@ export class CascadingCheckboxQuestion extends CheckboxQuestion {
 
   constructor(options: {} = {}) {
     super(options);
+    this.cascade = true;
     this.cascadeGroups = options['cascadeGroups'];
   }
 }

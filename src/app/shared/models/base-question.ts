@@ -5,6 +5,8 @@ export class BaseQuestion<T> {
   required: boolean;
   order: number;
   controlType: string;
+  cascade: boolean;
+  cascadeGroups: any;
 
   constructor(options: {
     value?: T,
