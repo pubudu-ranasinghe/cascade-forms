@@ -1,0 +1,16 @@
+<div [formGroup]="form">
+  <div [ngSwitch]="question.controlType">
+    <div *ngSwitchCase="'group'">
+      <app-form-group [question]="question" [form]="form"></app-form-group>
+    </div>
+    <div *ngSwitchCase="'checkbox'">
+      <input type="text" [formControlName]="question.key">
+    </div>
+    <div *ngSwitchCase="'number'">NUMBER</div>
+    <div *ngSwitchCase="'dateTime'">DATETIME</div>
+    <div *ngSwitchCase="'photo'">PHOTO</div>
+    <div *ngSwitchCase="'text'">TEXT</div>
+    <div *ngSwitchCase="'artifact'">ARTIFACT</div>
+    <div *ngSwitchCase="'list'">LIST</div>
+  </div>
+</div>

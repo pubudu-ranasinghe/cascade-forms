@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { QuestionGroup } from '../shared/models/index';
 import { FormGroup, FormControl } from '@angular/forms';
 import { BaseQuestion } from '../shared/models/base-question';
+import { Validators } from '@angular/forms/';
 
 @Injectable()
 export class QuestionControlService {
@@ -22,7 +23,7 @@ export class QuestionControlService {
           }
         });
       } else {
-        fg.addControl(question.key, new FormControl());
+        fg.addControl(question.key, new FormControl('hello', Validators.required));
       }
     });
     return fg;

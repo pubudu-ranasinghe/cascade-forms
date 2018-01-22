@@ -1,3 +1,9 @@
-<p>
-  form-group works!
-</p>
+<div [formGroup]="form">
+  <div [formGroupName]="question.key">
+    
+    <!-- <input type="text" formControlName="booleanField"> -->
+    <div *ngFor="let q of question.questions">
+      <app-dynamic-question [question]="q" [form]="formGroup"></app-dynamic-question>
+    </div>
+  </div>
+</div>

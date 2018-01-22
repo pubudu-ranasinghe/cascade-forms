@@ -1,11 +1,13 @@
 <div>
   <form [formGroup]="form">
     <p>Form ID: {{ questions.key }} Label: {{ questions.label }}</p>
-    <p *ngFor="let q of questions.questions">{{ q.key }}</p>
-    <app-form-group></app-form-group>
-    <fieldset formGroupName="section01">
+    <!-- <p *ngFor="let q of questions.questions">{{ q.questions |json }}</p> -->
+    <div *ngFor="let q of questions.questions">
+      <app-dynamic-question [question]="q" [form]="form"></app-dynamic-question>
+    </div>
+    <!-- <fieldset formGroupName="section01">
       <input type="text" formControlName="artifactField">
-    </fieldset>
+    </fieldset> -->
   </form>
 </div>
 
@@ -17,7 +19,7 @@
       <div *ngFor="let s of r.questions">
         - - {{ s.key }}
       </div>
-    </div>
+    </div>  
     <div *ngIf="r.cascade">
       <div *ngFor="let t of r.cascadeGroups">
         - - - {{ t.questions.key }}
