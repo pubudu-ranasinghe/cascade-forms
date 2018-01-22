@@ -15,7 +15,6 @@ export class QuestionControlService {
         const group = this.toFormGroup(question as QuestionGroup);
         fg.addControl(question.key, group);
       } else if (question.cascade) {
-        console.log('got cascade');
         fg.addControl(question.key, new FormControl());
         question.cascadeGroups.forEach(cg => {
           if (cg.active) {

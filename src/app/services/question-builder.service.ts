@@ -33,7 +33,7 @@ export class QuestionBuilderService {
             key: cascadeGroupKey
           });
           cascadeGroups.push({
-            active: false,
+            active: true,
             questions: cascadeGroup
           });
         });
@@ -108,7 +108,7 @@ export class QuestionBuilderService {
       });
       return new QuestionGroup({
         questions: questionArray,
-        key: data.key
+        key: key
       });
     } else { return null; }
   }
@@ -132,7 +132,8 @@ export class QuestionBuilderService {
       key: data.stageId
     });
 
-    console.log(masterGroup);
+    // console.log(masterGroup);
+    return masterGroup;
   }
 
 }

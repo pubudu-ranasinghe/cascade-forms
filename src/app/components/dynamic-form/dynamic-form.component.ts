@@ -4,14 +4,18 @@ import { QuestionBuilderService } from '../../services/question-builder.service'
 import { QuestionGroup, TextQuestion, CheckboxQuestion } from '../../shared/models/index';
 import { BaseQuestion } from '../../shared/models/base-question';
 import { QuestionControlService } from '../../services/question-control.service';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
   styleUrls: ['./dynamic-form.component.css'],
-  providers: [QuestionBuilderService, QuestionControlService]
+  providers: [QuestionControlService, QuestionBuilderService]
 })
 export class DynamicFormComponent implements OnInit {
+
+  @Input() questions: QuestionGroup;
+  form: FormGroup;
 
   officerjson = {
     'name': 'Saaraketha Officer UI',
@@ -136,14 +140,15 @@ export class DynamicFormComponent implements OnInit {
   };
 
   constructor(
-    private qbs: QuestionBuilderService,
-    private qcs: QuestionControlService
+    private qcs: QuestionControlService,
+    private qbs: QuestionBuilderService
   ) { }
 
   ngOnInit() {
-    const q = this.qbs.build(this.officerjson.stages[0]);
-    console.log(this.qcs.toFormGroup(q));
-    // console.log(this.fb.group(this.qbs.build(this.officerjson.stages[0])));
+    this.form = this.qcs.toFormGroup(this.questions);
+    console.log(this.questions);
+    console.log(this.form);
+
   }
 
 }

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/header.component';
 import { DynamicFormComponent } from './components/dynamic-form/dynamic-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroupComponent } from './components/form-group/form-group.component';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     HeaderComponent,
     DynamicFormComponent,
+    FormGroupComponent,
   ],
   imports: [
     BrowserModule,

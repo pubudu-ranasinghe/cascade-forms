@@ -1,22 +1,30 @@
-<form class="form-group">
-  <fieldset>
-    <label class="form-label" for="nameField">Name</label>
-    <input class="form-input" type="text" placeholder="CJ Patoilo" id="nameField">
-    <label class="form-label" for="ageRangeField">Age Range</label>
-    <select class="form-select" id="ageRangeField">
-      <option value="0-13">0-13</option>
-      <option value="14-17">14-17</option>
-      <option value="18-23">18-23</option>
-      <option value="24+">24+</option>
-    </select>
-    <label class="form-label" for="commentField">Comment</label>
-    <textarea class="form-input" placeholder="Hi CJ …" id="commentField"></textarea>
-    <div class="form-group">
-      <label class="form-switch">
-        <input type="checkbox">
-        <i class="form-icon"></i> Send me emails with news and tips
-      </label>
+<div>
+  <form [formGroup]="form">
+    <p>Form ID: {{ questions.key }} Label: {{ questions.label }}</p>
+    <p *ngFor="let q of questions.questions">{{ q.key }}</p>
+    <app-form-group></app-form-group>
+    <fieldset formGroupName="section01">
+      <input type="text" formControlName="artifactField">
+    </fieldset>
+  </form>
+</div>
+
+<!-- <div *ngFor="let q of questions.questions">
+  {{ q.key }}
+  <div *ngFor="let r of q.questions">
+    - {{ r.key }}
+    <div *ngIf="r.controlType === 'group'">
+      <div *ngFor="let s of r.questions">
+        - - {{ s.key }}
+      </div>
     </div>
-    <input class="btn btn-primary" type="submit" value="Send">
-  </fieldset>
-</form>
+    <div *ngIf="r.cascade">
+      <div *ngFor="let t of r.cascadeGroups">
+        - - - {{ t.questions.key }}
+        <div *ngFor="let u of t.questions.questions">
+          - - - - {{ u.key }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
