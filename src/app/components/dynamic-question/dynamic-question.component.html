@@ -1,16 +1,69 @@
 <div [formGroup]="form">
   <div [ngSwitch]="question.controlType">
+    
     <div *ngSwitchCase="'group'">
-      <app-form-group [question]="question" [form]="form"></app-form-group>
+      <app-form-group [question]="question" [form]="form" [parentKey]="question.key" (valueChanged)="cascadeValueChanged($event)"></app-form-group>
     </div>
+
     <div *ngSwitchCase="'checkbox'">
-      <input type="text" [formControlName]="question.key">
+      <div *ngIf="!question.cascade" class="form-group">
+        <label class="form-switch">
+          <input type="checkbox" [formControlName]="question.key">
+          <i class="form-icon"></i> {{ question.label }}
+        </label>
+      </div>
+      <div *ngIf="question.cascade">
+        <label class="form-switch">
+          <!-- <input type="checkbox" [formControlName]="question.key" (change)="cascadeValueChanged($event)"> -->
+          <input type="checkbox" [formControlName]="question.key">
+          <i class="form-icon"></i> {{ question.label }}
+        </label>
+        <div *ngFor="let cg of question.cascadeGroups">
+          <app-form-group *ngIf="cg.active" [question]="cg.questions" [form]="form" [parentKey]="question.key+cg.key"></app-form-group>          
+        </div>
+      </div>
     </div>
-    <div *ngSwitchCase="'number'">NUMBER</div>
-    <div *ngSwitchCase="'dateTime'">DATETIME</div>
-    <div *ngSwitchCase="'photo'">PHOTO</div>
-    <div *ngSwitchCase="'text'">TEXT</div>
-    <div *ngSwitchCase="'artifact'">ARTIFACT</div>
-    <div *ngSwitchCase="'list'">LIST</div>
+    
+    <div *ngSwitchCase="'number'">
+      <div class="form-group">
+        <label class="form-label" [for]="question.key">{{ question.label }}</label>
+        <input class="form-input" type="number" [formControlName]="question.key" id="{{ question.key }}">
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'dateTime'">
+      <div class="form-group">
+        <label class="form-label" [for]="question.key">{{ question.label }}</label>
+        <input class="form-input" type="datetime-local" [formControlName]="question.key" id="{{ question.key }}">
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'photo'">
+      <div class="form-group">
+        <label class="form-label" [for]="question.key">{{ question.label }}</label>
+        <input class="form-input" type="file" [formControlName]="question.key" id="{{ question.key }}">
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'text'">
+      <div class="form-group">
+        <label class="form-label" [for]="question.key">{{ question.label }}</label>
+        <input class="form-input" type="number" [formControlName]="question.key" id="{{ question.key }}">
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'artifact'">
+      <div class="form-group">
+        <label class="form-label" [for]="question.key">{{ question.label }}</label>
+        <input class="form-input" type="number" [formControlName]="question.key" id="{{ question.key }}">
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'list'">
+      <div class="form-group">
+        <label class="form-label" [for]="question.key">{{ question.label }}</label>
+        <input class="form-input" type="number" [formControlName]="question.key" id="{{ question.key }}">
+      </div>
+    </div>
   </div>
 </div>

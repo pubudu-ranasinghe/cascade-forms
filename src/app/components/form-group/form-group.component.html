@@ -1,9 +1,9 @@
-<div [formGroup]="form">
-  <div [formGroupName]="question.key">
-    
+<div [formGroup]="form" class="form-group inner-group">
+  <div [formGroupName]="parentKey">
+    <label class="form-label">{{ question.label }}</label>
     <!-- <input type="text" formControlName="booleanField"> -->
     <div *ngFor="let q of question.questions">
-      <app-dynamic-question [question]="q" [form]="formGroup"></app-dynamic-question>
+      <app-dynamic-question [question]="q" [form]="formGroup" (valueChanged)="notifyParent($event)"></app-dynamic-question>
     </div>
   </div>
 </div>

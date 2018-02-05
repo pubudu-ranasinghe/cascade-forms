@@ -7,6 +7,8 @@ import { Validators } from '@angular/forms/';
 @Injectable()
 export class QuestionControlService {
 
+  formInstance: FormGroup;
+
   constructor() { }
 
   public toFormGroup(questions: QuestionGroup): FormGroup {
@@ -16,17 +18,37 @@ export class QuestionControlService {
         const group = this.toFormGroup(question as QuestionGroup);
         fg.addControl(question.key, group);
       } else if (question.cascade) {
-        fg.addControl(question.key, new FormControl());
+        const cq = new FormControl();
+        cq.valueChanges.subscribe(val => {
+          // console.log(val);
+          const changedOption = question.cascadeGroups.find(q => q.key === val.toString());
+          question.cascadeGroups.forEach(g => {
+            g.active = false;
+            fg.removeControl(question.key + g.key);
+          });
+          fg.addControl(question.key + changedOption.key, this.toFormGroup(changedOption.questions));
+          changedOption.active = true;
+          // console.log(changedOption);
+        });
+        fg.addControl(question.key, cq);
         question.cascadeGroups.forEach(cg => {
           if (cg.active) {
             fg.addControl(question.key + cg.questions.key, this.toFormGroup(cg.questions));
           }
         });
       } else {
-        fg.addControl(question.key, new FormControl('hello', Validators.required));
+        fg.addControl(question.key, new FormControl('', Validators.required));
       }
     });
-    return fg;
+    this.formInstance = fg;
+    return this.formInstance;
+  }
+
+  public populateGroup(questions: QuestionGroup): FormGroup {
+
+
+
+    return this.formInstance;
   }
 
 }

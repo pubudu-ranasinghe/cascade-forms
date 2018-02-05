@@ -87,6 +87,32 @@ export class AppComponent {
                     'controlType': 'floatNumber',
                     'required': true,
                     'order': 1
+                  },
+                  'innerGroupField': {
+                    'label': 'Inner Group',
+                    'controlType': 'group',
+                    'order': 0,
+                    'items': {
+                      'innergrouptext': {
+                        'label': 'Inner Group Text Field',
+                        'controlType': 'text',
+                        'required': true,
+                        'order': 0
+                      },
+                      'innerinnerGroupField': {
+                        'label': 'Inner Inner Group',
+                        'controlType': 'group',
+                        'order': 0,
+                        'items': {
+                          'innergrouptext': {
+                            'label': 'Inner Inner Group Text Field',
+                            'controlType': 'text',
+                            'required': true,
+                            'order': 0
+                          }
+                        }
+                      }
+                    }
                   }
                 }
               },

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { BaseQuestion } from '../../shared/models/base-question';
 
@@ -10,14 +10,22 @@ import { BaseQuestion } from '../../shared/models/base-question';
 export class FormGroupComponent implements OnInit {
   @Input() question: BaseQuestion<any>;
   @Input() form: FormGroup;
+  @Input() parentKey: string;
+
+  @Output() valueChanged = new EventEmitter<any>();
 
   formGroup: AbstractControl;
   
   constructor() { }
 
   ngOnInit() {
-    this.formGroup = this.form.get(this.question.key);
-    console.log(this.form.get(this.question.key));
+    
+    this.formGroup = this.form.get(this.parentKey);
+  }
+
+  notifyParent(event) {
+    console.log('value change event captured in group');
+    this.valueChanged.emit(event);
   }
 
 }

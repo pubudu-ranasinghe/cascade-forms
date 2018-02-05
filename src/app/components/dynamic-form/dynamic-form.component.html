@@ -1,13 +1,14 @@
-<div>
-  <form [formGroup]="form">
+<div class="form-container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <p>Form ID: {{ questions.key }} Label: {{ questions.label }}</p>
     <!-- <p *ngFor="let q of questions.questions">{{ q.questions |json }}</p> -->
     <div *ngFor="let q of questions.questions">
-      <app-dynamic-question [question]="q" [form]="form"></app-dynamic-question>
+      <app-dynamic-question [question]="q" [form]="form" (valueChanged)="onSubmit($event)"></app-dynamic-question>
     </div>
     <!-- <fieldset formGroupName="section01">
       <input type="text" formControlName="artifactField">
     </fieldset> -->
+    <button class="btn btn-primary" type="submit" >Submit</button>
   </form>
 </div>
 

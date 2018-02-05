@@ -22,7 +22,7 @@ export class QuestionBuilderService {
     if (controlType === 'checkbox') {
       if (data.cascade) {
         const cascadeGroups = [];
-        Object.keys(data.cascade).forEach(cascadeGroupKey => {
+        Object.keys(data.cascade).forEach((cascadeGroupKey, index) => {
           const questionArray: BaseQuestion<any>[] = [];
           Object.keys(data.cascade[cascadeGroupKey])
             .forEach(itemKey => {
@@ -33,7 +33,9 @@ export class QuestionBuilderService {
             key: cascadeGroupKey
           });
           cascadeGroups.push({
-            active: true,
+            key: cascadeGroupKey,
+            active: cascadeGroupKey === 'false' ? true : false, // setting first group to be active by default
+            // active: false, // setting first group to be active by default
             questions: cascadeGroup
           });
         });
